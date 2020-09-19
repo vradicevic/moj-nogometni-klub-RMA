@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/playersFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.PlayersFragment"
+        android:label="players_fragment"
+        tools:layout="@layout/players_fragment" />
+    <fragment
+        android:id="@+id/formationsFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.FormationsFragment"
+        android:label="formations_fragment"
+        tools:layout="@layout/formations_fragment" />
+    <fragment
+        android:id="@+id/topPlayersFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.TopPlayersFragment"
+        android:label="top_players_fragment"
+        tools:layout="@layout/top_players_fragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_playersFragment"
+            app:destination="@id/playersFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

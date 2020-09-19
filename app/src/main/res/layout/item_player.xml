@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="10dp"
+    app:cardPreventCornerOverlap="false"
+    android:background="#FFF"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivPlayerPicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toTopOf="@id/tvPlayerNameAndSurname"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></ImageView>
+
+        <TextView
+            android:id="@+id/tvPlayerNameAndSurname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mirko Lazarić"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivPlayerPicture"></TextView>
+
+        <TextView
+            android:id="@+id/lbFifaID"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:text="FifaID:"
+            android:textAlignment="viewEnd"
+            android:textColor="#2F2F30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/lbRedCards"
+            app:layout_constraintTop_toBottomOf="@id/tvPlayerNameAndSurname"></TextView>
+
+        <TextView
+            android:textColor="#9E2F2F30"
+            android:id="@+id/tvPlayerFifaID"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:text="128UT99"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="@id/lbFifaID"
+            app:layout_constraintLeft_toRightOf="@id/lbFifaID"
+
+            ></TextView>
+
+        <TextView
+            android:id="@+id/lbPlayerScore"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:textColor="#2F2F30"
+
+            android:text="Golovi:"
+            android:textAlignment="viewEnd"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/lbFifaID"
+            app:layout_constraintTop_toBottomOf="@id/tvPlayerFifaID"></TextView>
+
+        <TextView
+            android:id="@+id/tvPlayerScore"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:textAlignment="center"
+            android:textColor="#9E2F2F30"
+            android:text="26"
+            app:layout_constraintTop_toTopOf="@id/lbPlayerScore"
+            app:layout_constraintLeft_toRightOf="@id/lbPlayerScore"
+
+            ></TextView>
+
+        <TextView
+            android:background="#DD0F0F"
+            android:id="@+id/lbRedCards"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:textColor="#2F2F30"
+
+            android:text="Crveni:"
+            android:textAlignment="viewEnd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/lbFifaID"
+            app:layout_constraintStart_toEndOf="@+id/lbFifaID"
+            app:layout_constraintTop_toTopOf="@+id/lbFifaID"></TextView>
+
+        <TextView
+            android:id="@+id/tvRedCards"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:text="1/5"
+            android:textColor="#9E2F2F30"
+
+
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/lbRedCards"
+            app:layout_constraintTop_toTopOf="@+id/lbRedCards"></TextView>
+
+        <TextView
+            android:id="@+id/lbYellowCards"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:background="#F9D625"
+            android:textColor="#2F2F30"
+
+            android:text="Žuti:"
+            android:textAlignment="viewEnd"
+            app:layout_constraintStart_toStartOf="@+id/lbRedCards"
+            app:layout_constraintTop_toBottomOf="@+id/lbRedCards"></TextView>
+
+        <TextView
+            android:id="@+id/tvYellowCards"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+
+            android:textColor="#9E2F2F30"
+
+            android:text="1/5"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/lbYellowCards"
+            app:layout_constraintTop_toBottomOf="@+id/lbRedCards"></TextView>
+        <TextView
+            android:id="@+id/tvPlayerPosition"
+            android:textAppearance="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            ></TextView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

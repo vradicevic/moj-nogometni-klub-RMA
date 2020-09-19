@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TopPlayersFragment">
+
+    <RadioGroup
+        android:id="@+id/rgSortBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/rbScore"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Golovi"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/rbYellowCards"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/rbYellowCards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Žuti"
+            app:layout_constraintLeft_toRightOf="@id/rbScore"
+            app:layout_constraintRight_toLeftOf="@+id/rbRedCards"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <RadioButton
+            android:id="@+id/rbRedCards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crveni"
+            app:layout_constraintLeft_toRightOf="@id/rbYellowCards"
+            app:layout_constraintRight_toLeftOf="@id/rbEquipment"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/rbEquipment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oprema"
+            app:layout_constraintLeft_toRightOf="@id/rbRedCards"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/highscore_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rgSortBy"></androidx.recyclerview.widget.RecyclerView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
