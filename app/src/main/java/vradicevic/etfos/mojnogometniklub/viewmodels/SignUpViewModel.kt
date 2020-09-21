@@ -1,4 +1,4 @@
-package vradicevic.etfos.mojnogometniklub
+package vradicevic.etfos.mojnogometniklub.viewmodels
 
 import androidx.lifecycle.ViewModel
 

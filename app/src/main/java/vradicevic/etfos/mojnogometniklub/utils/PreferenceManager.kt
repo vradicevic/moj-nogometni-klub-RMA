@@ -1,32 +1,32 @@
-package vradicevic.etfos.colouredbirds
+package vradicevic.etfos.mojnogometniklub.utils
 
 import android.content.Context
 
 class PreferenceManager {
     companion object {
         val PREFS_FILE = "MyPreferences"
-        val PREFS_COUNTER = "MyCounter"
-        val PREFS_KEY_BIRD = "Colour"
+        val PREFS_UUID = "MyCounter"
+        val PREFS_CLUB= ""
     }
 
-    fun saveBundle(bird: Int, counter:Int) {
-        val sharedPreferences = MyBirdCounterApp.ApplicationContext.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE)
+    fun saveUUID(uuid: String) {
+        val sharedPreferences = MyAppContext.getContext().getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putInt(PREFS_KEY_BIRD, bird)
-        editor.putInt(PREFS_COUNTER, counter);
+        editor.putString(PREFS_UUID, uuid)
         editor.apply()
     }
-
-    fun retrieveBird(): Int {
-        val sharedPreferences = MyBirdCounterApp.ApplicationContext.getSharedPreferences(
-            PREFS_FILE, Context.MODE_PRIVATE
-        )
-        return sharedPreferences.getInt(PREFS_KEY_BIRD,0)
+    fun saveClub(club:String?){
+        val sharedPreferences = MyAppContext.getContext().getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString(PREFS_CLUB, club)
+        editor.apply()
     }
-
-
-    fun retrieveCounter():Int{
-        val sharedPreferences = MyBirdCounterApp.ApplicationContext.getSharedPreferences(PREFS_FILE,Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(PREFS_COUNTER,0);
+    fun retrieveUUID():String?{
+        val sharedPreferences = MyAppContext.getContext().getSharedPreferences(PREFS_FILE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(PREFS_UUID,null);
+    }
+    fun retrieveClub():String?{
+        val sharedPreferences = MyAppContext.getContext().getSharedPreferences(PREFS_FILE,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(PREFS_CLUB,null);
     }
 }

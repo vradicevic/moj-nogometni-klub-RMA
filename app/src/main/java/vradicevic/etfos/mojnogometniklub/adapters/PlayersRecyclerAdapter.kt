@@ -3,6 +3,7 @@ package vradicevic.etfos.login
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.item_player.view.*
 import vradicevic.etfos.mojnogometniklub.R
 import vradicevic.etfos.mojnogometniklub.models.Player
 
-class PlayersRecyclerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PlayersRecyclerAdapter(val onPlayerClickedInterface:OnPlayerClickedInterface):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items: List<Player> = ArrayList();
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
        return PlayerViewHolder (
@@ -27,7 +28,7 @@ class PlayersRecyclerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is PlayerViewHolder->{
-                holder.bind(items.get(position))
+                holder.bind(items.get(position),onPlayerClickedInterface)
             }
         }
     }
@@ -47,13 +48,22 @@ class PlayersRecyclerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val tvYellowCards:TextView = itemView.tvYellowCards
         val tvPlayerScore:TextView = itemView.tvPlayerScore
         val tvPlayerPosition:TextView = itemView.tvPlayerPosition
-        fun bind(player:Player){
+        val btnUpdate:ImageButton = itemView.btnUpdate
+        val btnDelete:ImageButton = itemView.btnDelete
+
+        fun bind(player:Player,onPlayerClickedInterface: OnPlayerClickedInterface){
             tvPlayerNameAndSurname.text = player.name +" " +player.surname
             tvPlayerFifaID.text = player.fifaID
             tvPlayerScore.text = player.scores.toString()
-            tvRedCards.text = player.redCards.toString()
-            tvYellowCards.text = player.yellowCards.toString()
+            tvRedCards.text = player.redcards.toString()
+            tvYellowCards.text = player.yellowcards.toString()
             tvPlayerPosition.text = player.position
+            btnDelete.setOnClickListener {
+                onPlayerClickedInterface.onDeleteClicked(player.fifaID)
+            }
+            btnUpdate.setOnClickListener {
+                onPlayerClickedInterface.onUpdateClicked(player.fifaID,it)
+            }
 
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
@@ -67,6 +77,10 @@ class PlayersRecyclerAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
 
+    }
+    interface OnPlayerClickedInterface{
+        fun onUpdateClicked(id:String,it:View)
+        fun onDeleteClicked(id:String)
     }
 
 }

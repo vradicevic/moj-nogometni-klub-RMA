@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ic_football_field">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.LoginFragment"
+
+    >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Registracija"
+        android:textSize="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="150dp"
+        />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:alpha="0.23"
+        android:background="@drawable/textviewshape"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="8dp"
+        android:text="Email"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="@+id/etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvPassword"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lozinka"
+        app:layout_constraintLeft_toLeftOf="@id/etEmail"
+        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        android:paddingTop="16dp"
+        />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:alpha="0.23"
+        android:background="@drawable/textviewshape"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPassword"
+        />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/buttonshape"
+        android:text="Registriraj"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/listClubs"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="24dp"
+        />
+    <TextView
+        android:id="@+id/tvClubs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Klub za koji se registriraš"
+        app:layout_constraintLeft_toLeftOf="@id/etEmail"
+        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        android:paddingTop="16dp"
+        />
+
+    <Spinner
+        android:id="@+id/listClubs"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:alpha="0.23"
+        android:background="@drawable/textviewshape"
+        app:layout_constraintLeft_toLeftOf="@id/etPassword"
+        app:layout_constraintTop_toBottomOf="@id/tvClubs"
+        >
+
+    </Spinner>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

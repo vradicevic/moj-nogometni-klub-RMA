@@ -10,72 +10,31 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import vradicevic.etfos.mojnogometniklub.models.Formation
 
-import vradicevic.etfos.mojnogometniklub.MyAppContext
+import vradicevic.etfos.mojnogometniklub.utils.MyAppContext
 import vradicevic.etfos.mojnogometniklub.models.HighscoreItem
 import vradicevic.etfos.mojnogometniklub.models.Player
 import vradicevic.etfos.mojnogometniklub.room.PlayersDatabase
+import vradicevic.etfos.mojnogometniklub.utils.FirebaseUtils
+import vradicevic.etfos.mojnogometniklub.utils.FirebaseUtils.Companion.club
+import vradicevic.etfos.mojnogometniklub.utils.NotifManager
+import vradicevic.etfos.mojnogometniklub.utils.PreferenceManager
 
 object Repository {
     private lateinit var dbRoom: PlayersDatabase
     init {
-
         dbRoom = Room.databaseBuilder(
             MyAppContext.getContext(),
             PlayersDatabase::class.java,
             "database-name"
         ).build()
-        getDataFromAPI()
+        FirebaseUtils().startFirebaseConnection()
     }
     private lateinit var db:DatabaseReference
 
     var players = mutableListOf<Player>()
-    fun getPlayers():LiveData<MutableList<Player>>{
-
-        return object : LiveData<MutableList<Player>>(){
-            override fun onActive() {
-                super.onActive()
-                        db=FirebaseDatabase.getInstance().getReference("nksava/players")
-                        db.addValueEventListener(object: ValueEventListener {
-                            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                players.clear()
-                                dataSnapshot.children.forEach { child ->
-                                    players.add(
-                                        Player(
-                                            child.key.toString(),
-                                            child.child("name").value.toString(),
-                                            child.child("surname").value.toString(),
-
-                                            child.child("cards/red/total").value.toString().toInt(),
-                                            child.child("cards/yellow/total").value.toString().toInt(),
-                                            child.child("equipment").value.toString().toInt(),
-                                            child.child("scores").value.toString().toInt(),
-                                            child.child("position").value.toString(),
-                                            child.child("image").value.toString()
-                                        )
-                                    )
-                                }
-                                value=players;
-
-                                CoroutineScope(IO).launch{
-                                    players.forEach { player ->
-                                    dbRoom.playerDao().insertAll(player)
-                                    }
-                                    val result= dbRoom.playerDao().getAll()
-                                    withContext(Main){
-                                        Log.d("DEBUG", result.toString())
-                                    }
-                                }
-                            }
-
-                            override fun onCancelled(databaseError: DatabaseError) {
-                                Log.d("AppDebug",databaseError.message)
-                            }
-                        })
-            }
-        }
-    }
-
+    var formation:Formation = Formation("")
 
     fun getPlayersFromRoom():LiveData<MutableList<Player>>{
         return object:LiveData<MutableList<Player>>(){
@@ -92,6 +51,28 @@ object Repository {
             }
         }
     }
+    fun getFormationFromRoom():LiveData<MutableList<Formation>>{
+        return object:LiveData<MutableList<Formation>>(){
+            override fun onActive() {
+                super.onActive()
+                CoroutineScope(IO).launch {
+                    dbRoom.formationDao().getAll().collect{it->
+                        withContext(Main){
+                            value=it
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    fun getPlayerByID(id:String):Player{
+        val player = dbRoom.playerDao().getPlayer(id)
+        return player
+    }
+
     fun getScoreHighscore():LiveData<MutableList<HighscoreItem>>{
         return object:LiveData<MutableList<HighscoreItem>>(){
             override fun onActive() {
@@ -154,19 +135,21 @@ object Repository {
     }
 
     fun getDataFromAPI(){
-        db=FirebaseDatabase.getInstance().getReference("nksava/players")
+        val club=PreferenceManager().retrieveClub()
+        db=FirebaseUtils.database.getReference("clubs/${club}/players")
         db.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                NotifManager.sendNotification()
                 players.clear()
                 dataSnapshot.children.forEach { child ->
+
                     players.add(
                         Player(
                             child.key.toString(),
                             child.child("name").value.toString(),
                             child.child("surname").value.toString(),
-
-                            child.child("cards/red/total").value.toString().toInt(),
-                            child.child("cards/yellow/total").value.toString().toInt(),
+                            child.child("redcards").value.toString().toInt(),
+                            child.child("yellowcards").value.toString().toInt(),
                             child.child("equipment").value.toString().toFloat().toInt(),
                             child.child("scores").value.toString().toInt(),
                             child.child("position").value.toString(),
@@ -177,12 +160,9 @@ object Repository {
 
 
                 CoroutineScope(IO).launch{
+                    dbRoom.playerDao().deleteAll()
                     players.forEach { player ->
                         dbRoom.playerDao().insertAll(player)
-                    }
-                    val result= dbRoom.playerDao().getAll()
-                    withContext(Main){
-                        Log.d("DEBUG", result.toString())
                     }
                 }
             }
@@ -191,6 +171,27 @@ object Repository {
                 Log.d("AppDebug",databaseError.message)
             }
         })
+        FirebaseUtils.database.getReference("clubs/${club}/formation")
+            .addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        Log.d("FORM_DEBUG", dataSnapshot.value.toString())
+                        formation.formationUrl=dataSnapshot.value.toString()
+
+
+                    CoroutineScope(IO).launch{
+                        dbRoom.formationDao().deleteAll()
+                        dbRoom.formationDao().insertAll(formation)
+
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.d("AppDebug",databaseError.message)
+                }
+            })
+
+
+
     }
 
 

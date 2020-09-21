@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="vradicevic.etfos.mojnogometniklub.viewmodels.UpdatePlayerViewModel" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <TextView
+                android:id="@+id/tvTitleUP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Forma za unos igrača"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/MaterialAlertDialog.MaterialComponents.Title.Text.CenterStacked"
+                ></TextView>
+
+            <ImageView
+                android:id="@+id/ivPlayerUP"
+                android:tag="mipmap-hdpi/ic_launcher.png"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleUP"
+                app:profileImageUP="@{viewModel.form.image}"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFifaID"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ivPlayerUP"
+                android:hint="Fifa ID"
+                >
+                <EditText
+                    android:id="@+id/etFifaIDUP"
+                    android:layout_width="match_parent"
+                    android:text="@{viewModel.form.fifaID}"
+                    android:layout_height="wrap_content"
+                    app:addTextChangedListener="@{viewModel.fifaIDTW}"
+                    android:enabled="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tilFifaID"
+                android:hint="Ime">
+                <EditText
+                    android:id="@+id/etNameUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.form.name}"
+                    app:addTextChangedListener="@{viewModel.nameTW}"
+                    android:enabled="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSurname"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tilName"
+                android:hint="Prezime">
+                <EditText
+                    android:id="@+id/etSurnameUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.form.surname}"
+                    app:addTextChangedListener="@{viewModel.surnnameTW}"
+                    android:enabled="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilScore"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tilSurname"
+                android:hint="Golovi">
+                <EditText
+                    android:id="@+id/etScoreUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@{viewModel.form.score}"
+                    app:addTextChangedListener="@{viewModel.scoreTW}"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEquipment"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tilScore"
+                android:hint="Novac uložen u opremu">
+                <EditText
+                    android:id="@+id/etEquipmentUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@{viewModel.form.equipment}"
+                    app:addTextChangedListener="@{viewModel.equipmentTW}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilRedCards"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tilEquipment"
+                android:hint="Crveni kartoni">
+                <EditText
+                    android:id="@+id/etRedCardsUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@{viewModel.form.redCards}"
+                    app:addTextChangedListener="@{viewModel.redcardsTW}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilYellowCards"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tilRedCards"
+                android:hint="Žuti kartoni">
+                <EditText
+                    android:id="@+id/etYellowCardsUP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@{viewModel.form.yellowCards}"
+                    app:addTextChangedListener="@{viewModel.yellowcardsTW}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+            <RadioGroup
+                android:id="@+id/rgPositionUP"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tooltipText="Pozicija igrača"
+                app:layout_constraintTop_toBottomOf="@id/tilYellowCards"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="center"
+                android:onCheckedChanged="@{viewModel.onCheckedChange}"
+                >
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbPlayerUP"
+                    android:text="P"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbGoalkeeperUP"
+                    android:text="GK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </RadioGroup>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdatePlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dodaj"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rgPositionUP"
+                android:onClick="@{viewModel.onSubmitClicked}"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

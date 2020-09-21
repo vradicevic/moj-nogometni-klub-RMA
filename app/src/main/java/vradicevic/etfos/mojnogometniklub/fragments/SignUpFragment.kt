@@ -1,6 +1,5 @@
-package vradicevic.etfos.mojnogometniklub
+package vradicevic.etfos.mojnogometniklub.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,17 +13,17 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.create_player_fragment.*
 import kotlinx.android.synthetic.main.sign_up_fragment.*
-import vradicevic.etfos.login.Repository
+import vradicevic.etfos.mojnogometniklub.R
 import vradicevic.etfos.mojnogometniklub.utils.FirebaseUtils
 import vradicevic.etfos.mojnogometniklub.utils.MyAppContext
-import vradicevic.etfos.mojnogometniklub.utils.PreferenceManager
+import vradicevic.etfos.mojnogometniklub.viewmodels.SignUpViewModel
 
 class SignUpFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SignUpFragment()
+        fun newInstance() =
+            SignUpFragment()
     }
 
     private lateinit var viewModel: SignUpViewModel

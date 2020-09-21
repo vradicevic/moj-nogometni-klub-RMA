@@ -1,7 +1,7 @@
-package vradicevic.etfos.mojnogometniklub
+package vradicevic.etfos.mojnogometniklub.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +11,18 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login_fragment.*
+import vradicevic.etfos.mojnogometniklub.viewmodels.LoginViewModel
+import vradicevic.etfos.mojnogometniklub.utils.MyAppContext
+import vradicevic.etfos.mojnogometniklub.R
+import vradicevic.etfos.mojnogometniklub.utils.FirebaseUtils
+import vradicevic.etfos.mojnogometniklub.utils.PreferenceManager
 
 class LoginFragment : Fragment() {
 
     companion object {
-        fun newInstance() = LoginFragment()
+        fun newInstance() =
+            LoginFragment()
     }
 
     private lateinit var viewModel: LoginViewModel
@@ -28,19 +33,28 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        onAuthChanged()
         return inflater.inflate(R.layout.login_fragment, container, false)
+
     }
+
+    private fun onAuthChanged() {
+
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController= Navigation.findNavController(view)
         bottomNav= requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         auth = FirebaseAuth.getInstance()
         if(auth.currentUser!=null){
+            Log.d("USER",auth.currentUser.toString())
             navController.navigate(R.id.action_loginFragment_to_playersFragment)
         }else bottomNav.visibility= View.GONE
         addListeners(auth)
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -50,21 +64,24 @@ class LoginFragment : Fragment() {
 
     private fun addListeners(auth:FirebaseAuth) {
         btnLogin.setOnClickListener {
-
+            it.isEnabled=false
             auth.signInWithEmailAndPassword(etEmail.text.toString(),etPassword.text.toString())
                 .addOnCompleteListener { task ->
+                    it.isEnabled=true
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Toast.makeText(MyAppContext.getContext(), "Prijavljeni ste kao: ${auth.currentUser}",
+
+                        Toast.makeText(
+                            MyAppContext.getContext(), "Prijavljeni ste kao: ${auth.currentUser}",
                             Toast.LENGTH_SHORT).show()
                         bottomNav.visibility=View.VISIBLE
+                        PreferenceManager().saveUUID(auth.currentUser!!.uid)
+
                         navController.navigate(R.id.action_loginFragment_to_playersFragment)
 
 
                     } else {
                         // If sign in fails, display a message to the user.
-
-                        Toast.makeText(getContext(), "${task.toString()}",
+                        Toast.makeText(MyAppContext.getContext(), "${task.toString()}",
                             Toast.LENGTH_SHORT).show()
 
                         // ...
@@ -72,6 +89,9 @@ class LoginFragment : Fragment() {
 
 
 
+        }
+        btnGoToSignUp.setOnClickListener {
+            navController.navigate(R.id.action_loginFragment_to_signUpFragment)
         }
     }
 

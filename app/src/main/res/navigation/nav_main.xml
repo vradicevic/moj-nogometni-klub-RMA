@@ -7,22 +7,48 @@
 
     <fragment
         android:id="@+id/playersFragment"
-        android:name="vradicevic.etfos.mojnogometniklub.PlayersFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.fragments.PlayersFragment"
         android:label="players_fragment"
-        tools:layout="@layout/players_fragment" />
+        tools:layout="@layout/players_fragment" >
+        <action
+            android:id="@+id/action_playersFragment_to_createPlayerFragment"
+            app:destination="@id/createPlayerFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_playersFragment_to_updatePlayerFragment"
+            app:destination="@id/updatePlayerFragment" />
+        <action
+            android:id="@+id/action_playersFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/playersFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
     <fragment
         android:id="@+id/formationsFragment"
-        android:name="vradicevic.etfos.mojnogometniklub.FormationsFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.fragments.FormationsFragment"
         android:label="formations_fragment"
-        tools:layout="@layout/formations_fragment" />
+        tools:layout="@layout/formations_fragment" >
+        <action
+            android:id="@+id/action_formationsFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/formationsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/topPlayersFragment"
-        android:name="vradicevic.etfos.mojnogometniklub.TopPlayersFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.fragments.TopPlayersFragment"
         android:label="top_players_fragment"
-        tools:layout="@layout/top_players_fragment" />
+        tools:layout="@layout/top_players_fragment" >
+        <action
+            android:id="@+id/action_topPlayersFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/topPlayersFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="vradicevic.etfos.mojnogometniklub.LoginFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.fragments.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
         <action
@@ -30,5 +56,70 @@
             app:destination="@id/playersFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPlayerFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.fragments.CreatePlayerFragment"
+        android:label="create_player_fragment"
+        tools:layout="@layout/create_player_fragment" >
+        <action
+            android:id="@+id/action_createPlayerFragment_to_playersFragment"
+            app:destination="@id/playersFragment"
+            app:popUpTo="@id/createPlayerFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_createPlayerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/createPlayerFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_createPlayerFragment_to_formationsFragment"
+            app:destination="@id/formationsFragment"
+            app:popUpTo="@id/createPlayerFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_createPlayerFragment_to_topPlayersFragment"
+            app:destination="@id/topPlayersFragment"
+            app:popUpTo="@id/createPlayerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/updatePlayerFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.fragments.UpdatePlayerFragment"
+        android:label="UpdatePlayerFragment" >
+        <action
+            android:id="@+id/action_updatePlayerFragment_to_playersFragment"
+            app:destination="@id/playersFragment"
+            app:popUpTo="@id/updatePlayerFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="player1"
+            app:argType="vradicevic.etfos.mojnogometniklub.models.UpdatePlayer" />
+        <action
+            android:id="@+id/action_updatePlayerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/updatePlayerFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_updatePlayerFragment_to_formationsFragment"
+            app:destination="@id/formationsFragment"
+            app:popUpTo="@id/updatePlayerFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_updatePlayerFragment_to_topPlayersFragment"
+            app:destination="@id/topPlayersFragment"
+            app:popUpTo="@id/updatePlayerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="vradicevic.etfos.mojnogometniklub.fragments.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

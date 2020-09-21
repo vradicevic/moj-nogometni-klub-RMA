@@ -1,8 +1,6 @@
-package vradicevic.etfos.mojnogometniklub
+package vradicevic.etfos.mojnogometniklub.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,17 +10,17 @@ import android.widget.RadioGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.players_fragment.*
 import kotlinx.android.synthetic.main.top_players_fragment.*
-import vradicevic.etfos.login.PlayersRecyclerAdapter
+import vradicevic.etfos.mojnogometniklub.PlayerItemDecoration
+import vradicevic.etfos.mojnogometniklub.R
 import vradicevic.etfos.mojnogometniklub.adapters.HighscorePlayersAdapter
-import vradicevic.etfos.mojnogometniklub.viewmodels.FormationsViewModel
 import vradicevic.etfos.mojnogometniklub.viewmodels.TopPlayersViewModel
 
 class TopPlayersFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TopPlayersFragment()
+        fun newInstance() =
+            TopPlayersFragment()
     }
 
     private lateinit var viewModel: TopPlayersViewModel
@@ -55,7 +53,8 @@ class TopPlayersFragment : Fragment() {
 
     private fun initRecyclerView(){
         highscore_recycler_view.layoutManager = LinearLayoutManager(activity)
-        val itemDecoration = PlayerItemDecoration(30)
+        val itemDecoration =
+            PlayerItemDecoration(30)
         highscore_recycler_view.addItemDecoration(itemDecoration)
         highscoreAdapter = HighscorePlayersAdapter()
         highscore_recycler_view.adapter=highscoreAdapter
@@ -65,9 +64,9 @@ class TopPlayersFragment : Fragment() {
         val radio: RadioButton = requireActivity().findViewById(checkedId)
         viewModel.players.removeObservers(viewLifecycleOwner)
         when(radio.id){
-            R.id.rbScore-> viewModel.changePlayersReference("score")
-            R.id.rbRedCards-> viewModel.changePlayersReference("redcards")
-            R.id.rbYellowCards-> viewModel.changePlayersReference("yellowcards")
+            R.id.rbScore -> viewModel.changePlayersReference("score")
+            R.id.rbRedCards -> viewModel.changePlayersReference("redcards")
+            R.id.rbYellowCards -> viewModel.changePlayersReference("yellowcards")
             R.id.rbEquipment -> viewModel.changePlayersReference("equipment")
         }
         viewModel.players.observe(viewLifecycleOwner, Observer{

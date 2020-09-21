@@ -1,6 +1,8 @@
-package vradicevic.etfos.mojnogometniklub
+package vradicevic.etfos.mojnogometniklub.utils
+
+import android.net.Uri
 
 interface CreatePlayerCallbacks {
-    fun onSuccess(message:String)
+    fun onSuccess(uri: Uri?)
     fun onError(message: String)
 }
