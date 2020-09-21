@@ -1,27 +1,20 @@
 package vradicevic.etfos.login
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.google.firebase.database.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 import vradicevic.etfos.mojnogometniklub.MyAppContext
-import vradicevic.etfos.mojnogometniklub.models.Cards
 import vradicevic.etfos.mojnogometniklub.models.HighscoreItem
 import vradicevic.etfos.mojnogometniklub.models.Player
-import vradicevic.etfos.mojnogometniklub.room.PlayerDao
 import vradicevic.etfos.mojnogometniklub.room.PlayersDatabase
-import java.security.AccessController.getContext
 
 object Repository {
     private lateinit var dbRoom: PlayersDatabase
