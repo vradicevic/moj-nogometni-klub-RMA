@@ -49,6 +49,7 @@ class LoginFragment : Fragment() {
         bottomNav= requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         auth = FirebaseAuth.getInstance()
         if(auth.currentUser!=null){
+            Log.d("LOGOUT", "mozda sam ovjde")
             Log.d("USER",auth.currentUser.toString())
             navController.navigate(R.id.action_loginFragment_to_playersFragment)
         }else bottomNav.visibility= View.GONE
@@ -76,7 +77,7 @@ class LoginFragment : Fragment() {
                         bottomNav.visibility=View.VISIBLE
                         PreferenceManager().saveUUID(auth.currentUser!!.uid)
 
-                        navController.navigate(R.id.action_loginFragment_to_playersFragment)
+                        navController.navigate(R.id.playersFragment)
 
 
                     } else {

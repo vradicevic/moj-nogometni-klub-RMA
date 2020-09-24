@@ -19,9 +19,7 @@
             app:destination="@id/updatePlayerFragment" />
         <action
             android:id="@+id/action_playersFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/playersFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/loginFragment" />
 
     </fragment>
     <fragment
@@ -31,9 +29,7 @@
         tools:layout="@layout/formations_fragment" >
         <action
             android:id="@+id/action_formationsFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/formationsFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/topPlayersFragment"
@@ -42,9 +38,7 @@
         tools:layout="@layout/top_players_fragment" >
         <action
             android:id="@+id/action_topPlayersFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/topPlayersFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -53,9 +47,7 @@
         tools:layout="@layout/login_fragment" >
         <action
             android:id="@+id/action_loginFragment_to_playersFragment"
-            app:destination="@id/playersFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/playersFragment" />
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -72,9 +64,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_createPlayerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/createPlayerFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_createPlayerFragment_to_formationsFragment"
             app:destination="@id/formationsFragment"
@@ -100,9 +90,7 @@
             app:argType="vradicevic.etfos.mojnogometniklub.models.UpdatePlayer" />
         <action
             android:id="@+id/action_updatePlayerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/updatePlayerFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_updatePlayerFragment_to_formationsFragment"
             app:destination="@id/formationsFragment"

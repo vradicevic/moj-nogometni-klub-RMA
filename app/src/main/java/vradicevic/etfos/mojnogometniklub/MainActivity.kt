@@ -80,19 +80,22 @@ class MainActivity : AppCompatActivity(),FirebaseAuth.AuthStateListener {
             saveUUID("")
         }
         navController= findNavController(R.id.fragment)
+        Log.d("LOGOUT",navController.currentDestination!!.id.toString())
         when(navController.currentDestination!!.id){
-            R.id.playersFragment-> navController.navigate(R.id.action_playersFragment_to_loginFragment)
-            R.id.updatePlayerFragment-> navController.navigate(R.id.action_updatePlayerFragment_to_loginFragment)
-            R.id.createPlayerFragment-> navController.navigate(R.id.action_createPlayerFragment_to_loginFragment)
-            R.id.topPlayersFragment-> navController.navigate(R.id.action_topPlayersFragment_to_loginFragment)
-            R.id.formationsFragment-> navController.navigate(R.id.action_formationsFragment_to_loginFragment)
+            R.id.playersFragment->{  navController.navigate(R.id.loginFragment);}
+            R.id.updatePlayerFragment->{ navController.navigate(R.id.loginFragment);}
+            R.id.createPlayerFragment->{ navController.navigate(R.id.loginFragment);}
+            R.id.topPlayersFragment->{ navController.navigate(R.id.loginFragment);}
+            R.id.formationsFragment->{ navController.navigate(R.id.loginFragment);}
         }
-        navController.apply {
+
+       navController.apply {
             try{popBackStack(R.id.playersFragment, true);} catch (e:NullPointerException){null}
             try{popBackStack(R.id.updatePlayerFragment, true);}catch (e:NullPointerException){null}
             try{popBackStack(R.id.createPlayerFragment, true);}catch (e:NullPointerException){null}
             try{popBackStack(R.id.topPlayersFragment, true);}catch (e:NullPointerException){null}
             try{popBackStack(R.id.formationsFragment, true);}catch (e:NullPointerException){null}
+
         }
 
 
