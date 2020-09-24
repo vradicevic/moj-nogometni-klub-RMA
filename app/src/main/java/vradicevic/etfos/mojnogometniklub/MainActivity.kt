@@ -32,6 +32,7 @@ import vradicevic.etfos.mojnogometniklub.utils.MyAppContext
 import vradicevic.etfos.mojnogometniklub.utils.PreferenceManager
 import vradicevic.etfos.mojnogometniklub.viewmodels.FormationsViewModel
 import vradicevic.etfos.mojnogometniklub.viewmodels.PlayersViewModel
+import java.lang.NullPointerException
 
 
 class MainActivity : AppCompatActivity(),FirebaseAuth.AuthStateListener {
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity(),FirebaseAuth.AuthStateListener {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
+
     }
 
 
@@ -78,13 +80,6 @@ class MainActivity : AppCompatActivity(),FirebaseAuth.AuthStateListener {
             saveUUID("")
         }
         navController= findNavController(R.id.fragment)
-        navController.apply {
-            popBackStack(R.id.playersFragment, true);
-            popBackStack(R.id.updatePlayerFragment, true);
-            popBackStack(R.id.createPlayerFragment, true);
-            popBackStack(R.id.topPlayersFragment, true);
-            popBackStack(R.id.formationsFragment, true);
-        }
         when(navController.currentDestination!!.id){
             R.id.playersFragment-> navController.navigate(R.id.action_playersFragment_to_loginFragment)
             R.id.updatePlayerFragment-> navController.navigate(R.id.action_updatePlayerFragment_to_loginFragment)
@@ -92,6 +87,14 @@ class MainActivity : AppCompatActivity(),FirebaseAuth.AuthStateListener {
             R.id.topPlayersFragment-> navController.navigate(R.id.action_topPlayersFragment_to_loginFragment)
             R.id.formationsFragment-> navController.navigate(R.id.action_formationsFragment_to_loginFragment)
         }
+        navController.apply {
+            try{popBackStack(R.id.playersFragment, true);} catch (e:NullPointerException){null}
+            try{popBackStack(R.id.updatePlayerFragment, true);}catch (e:NullPointerException){null}
+            try{popBackStack(R.id.createPlayerFragment, true);}catch (e:NullPointerException){null}
+            try{popBackStack(R.id.topPlayersFragment, true);}catch (e:NullPointerException){null}
+            try{popBackStack(R.id.formationsFragment, true);}catch (e:NullPointerException){null}
+        }
+
 
     }
     override fun onAuthStateChanged(auth: FirebaseAuth) {
