@@ -29,11 +29,12 @@ object Repository {
             PlayersDatabase::class.java,
             "database-name"
         ).build()
-        FirebaseUtils().startFirebaseConnection()
+        FirebaseUtils().
+        startFirebaseConnection()
     }
     private lateinit var db:DatabaseReference
 
-    var players = mutableListOf<Player>()
+
     var formation:Formation = Formation("")
 
     fun getPlayersFromRoom():LiveData<MutableList<Player>>{
@@ -79,7 +80,7 @@ object Repository {
                 super.onActive()
                 CoroutineScope(IO).launch {
                     dbRoom.playerDao().getPlayersByScore().collect{it->
-                        Log.d("FLOW", it.toString())
+
                         withContext(Main){
                             value=it
                         }
@@ -140,7 +141,7 @@ object Repository {
         db.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 NotifManager.sendNotification()
-                players.clear()
+                val players = mutableListOf<Player>()
                 dataSnapshot.children.forEach { child ->
 
                     players.add(
@@ -174,7 +175,7 @@ object Repository {
         FirebaseUtils.database.getReference("clubs/${club}/formation")
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        Log.d("FORM_DEBUG", dataSnapshot.value.toString())
+
                         formation.formationUrl=dataSnapshot.value.toString()
 
 

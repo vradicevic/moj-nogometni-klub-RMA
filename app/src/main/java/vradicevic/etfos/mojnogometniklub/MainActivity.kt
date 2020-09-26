@@ -79,27 +79,39 @@ class MainActivity : AppCompatActivity(),FirebaseAuth.AuthStateListener {
             saveClub("")
             saveUUID("")
         }
+
         navController= findNavController(R.id.fragment)
         Log.d("LOGOUT",navController.currentDestination!!.id.toString())
         when(navController.currentDestination!!.id){
-            R.id.playersFragment->{  navController.navigate(R.id.loginFragment);}
-            R.id.updatePlayerFragment->{ navController.navigate(R.id.loginFragment);}
-            R.id.createPlayerFragment->{ navController.navigate(R.id.loginFragment);}
-            R.id.topPlayersFragment->{ navController.navigate(R.id.loginFragment);}
-            R.id.formationsFragment->{ navController.navigate(R.id.loginFragment);}
+            R.id.playersFragment->{ navController.navigate(R.id.action_playersFragment_to_loginFragment);}
+            R.id.updatePlayerFragment->{navController.navigate(R.id.action_updatePlayerFragment_to_loginFragment);}
+            R.id.createPlayerFragment->{ navController.navigate(R.id.action_createPlayerFragment_to_loginFragment);}
+            R.id.topPlayersFragment->{navController.navigate(R.id.action_topPlayersFragment_to_loginFragment);}
+            R.id.formationsFragment->{ navController.navigate(R.id.action_formationsFragment_to_loginFragment);}
         }
 
-       navController.apply {
-            try{popBackStack(R.id.playersFragment, true);} catch (e:NullPointerException){null}
-            try{popBackStack(R.id.updatePlayerFragment, true);}catch (e:NullPointerException){null}
-            try{popBackStack(R.id.createPlayerFragment, true);}catch (e:NullPointerException){null}
-            try{popBackStack(R.id.topPlayersFragment, true);}catch (e:NullPointerException){null}
-            try{popBackStack(R.id.formationsFragment, true);}catch (e:NullPointerException){null}
 
-        }
 
 
     }
+
+    override fun onBackPressed() {
+        when(navController.currentDestination!!.id)
+            {R.id.loginFragment-> finishAndRemoveTask()
+             else ->super.onBackPressed()}
+
+    }
+
+    fun removeBackstack(navController: NavController)
+    {
+        navController.apply {
+            try{popBackStack(R.id.playersFragment, false);} catch (e:NullPointerException){null}
+            try{popBackStack(R.id.updatePlayerFragment, false);}catch (e:NullPointerException){null}
+            try{popBackStack(R.id.createPlayerFragment, false);}catch (e:NullPointerException){null}
+            try{popBackStack(R.id.topPlayersFragment, false);}catch (e:NullPointerException){null}
+            try{popBackStack(R.id.formationsFragment, false);}catch (e:NullPointerException){null}
+
+        }}
     override fun onAuthStateChanged(auth: FirebaseAuth) {
         bottomNavigationView= findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         Log.d("TAG_IO",auth.currentUser.toString())

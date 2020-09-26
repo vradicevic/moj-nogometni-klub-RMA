@@ -19,6 +19,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -108,7 +110,7 @@ class UpdatePlayerFragment : Fragment(), UpdatePlayerCallbacks {
             withContext(Main){
                 btnUpdatePlayer.text="Dodaj"
                 btnUpdatePlayer.isEnabled= true
-                navController= Navigation.findNavController(binder.root)
+                navController= findNavController()
                 navController.navigate(R.id.action_updatePlayerFragment_to_playersFragment)
             }
 

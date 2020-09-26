@@ -29,7 +29,7 @@ class FirebaseUtils {
                 var uuid = PreferenceManager().retrieveUUID()
                 Log.d("UUID",uuid)
                 data.children.forEach { child->
-                    Log.d("UUID",child.key.toString())
+
                     if(uuid==child.key.toString()){
                         club = child.child("club").value.toString()
                         PreferenceManager().saveClub(club)

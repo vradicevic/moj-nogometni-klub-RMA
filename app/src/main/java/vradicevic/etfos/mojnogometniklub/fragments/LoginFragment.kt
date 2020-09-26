@@ -33,14 +33,11 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        onAuthChanged()
         return inflater.inflate(R.layout.login_fragment, container, false)
 
     }
 
-    private fun onAuthChanged() {
 
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,12 +69,12 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
 
                         Toast.makeText(
-                            MyAppContext.getContext(), "Prijavljeni ste kao: ${auth.currentUser}",
+                            MyAppContext.getContext(), "Prijavljeni ste kao: ${auth.currentUser!!.email}",
                             Toast.LENGTH_SHORT).show()
                         bottomNav.visibility=View.VISIBLE
                         PreferenceManager().saveUUID(auth.currentUser!!.uid)
-
-                        navController.navigate(R.id.playersFragment)
+                        FirebaseUtils().startFirebaseConnection()
+                        navController.navigate(R.id.action_loginFragment_to_playersFragment)
 
 
                     } else {
